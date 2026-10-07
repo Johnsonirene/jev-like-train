@@ -1,7 +1,7 @@
 {
   "autojev": {
     "full-noncausal": {
-      "source_directory": "/home/longcat/projects/jev-train/pplx_small/runs/full-noncausal/checkpoints/step-01050",
+      "source_directory": "pplx_small/runs/full-noncausal/checkpoints/step-01050",
       "base_model": "Qwen/Qwen3.5-0.8B-Base",
       "revision": "dc7cdfe2ee4154fa7e30f5b51ca41bfa40174e68",
       "attention_mode": "noncausal_full_attention",
@@ -51,7 +51,7 @@
       ]
     },
     "full-causal": {
-      "source_directory": "/home/longcat/projects/jev-train/pplx_small/runs/full-causal/checkpoints/step-01050",
+      "source_directory": "pplx_small/runs/full-causal/checkpoints/step-01050",
       "base_model": "Qwen/Qwen3.5-0.8B-Base",
       "revision": "dc7cdfe2ee4154fa7e30f5b51ca41bfa40174e68",
       "attention_mode": "causal",
@@ -103,8 +103,8 @@
   },
   "agentjev": {
     "full_qwen3_0.6b": {
-      "source_directory": "/home/longcat/projects/jev-train/text_jev_train/runs/full_qwen3_0.6b",
-      "backbone_directory": "/mnt/d/LLm/Base-models/Qwen3-0.6B",
+      "source_directory": "text_jev_train/runs/full_qwen3_0.6b",
+      "backbone_directory": "models/Qwen3-0.6B",
       "files": [
         {
           "file": "best.pt",
@@ -119,8 +119,8 @@
       ]
     },
     "full_qwen3_0.6b_base": {
-      "source_directory": "/home/longcat/projects/jev-train/text_jev_train/runs/full_qwen3_0.6b_base",
-      "backbone_directory": "/mnt/d/LLm/Base-models/Qwen3-0.6B-Base",
+      "source_directory": "text_jev_train/runs/full_qwen3_0.6b_base",
+      "backbone_directory": "models/Qwen3-0.6B-Base",
       "files": [
         {
           "file": "best.pt",
@@ -134,5 +134,9 @@
         }
       ]
     }
+  },
+  "path_bases": {
+    "source_directory": "original training workspace root",
+    "backbone_directory": "this repository root"
   }
 }

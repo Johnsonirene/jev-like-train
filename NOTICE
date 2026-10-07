@@ -1,4 +1,4 @@
-This repository contains deployment subsets of:
+This repository contains training and deployment code of:
 - Perplexity autojev, perplexity-ai/pplx-decider-v1.1-27b,
   revision 3b45dead91dfa6d95aad6b95764a606fab2bf7a6 (Apache-2.0).
 - AgentJev, malevrigns/agent-jev (Apache-2.0), via the locally
@@ -6,7 +6,12 @@ This repository contains deployment subsets of:
 
 The autojev model.py includes the local processor chat-template fallback used
 in training. Model scoring and checkpoint loading are preserved.
-In this deployment subset, autojev GET / redirects to /docs, and AgentJev
+In this repository, autojev GET / redirects to /docs, and AgentJev
 GET / returns model info when no custom page is supplied, because the source
 snapshots contain no playground HTML. No training weights or data are included.
 The base model and dataset licenses apply separately to their artifacts.
+
+Training/data/evaluation modules were added from the same local training
+snapshot. AgentJev training scripts and protocols are unchanged. Additional
+source-cache preparation and portable paths support reproduction from this
+repository; they do not change training loss or selection/calibration policy.

@@ -1,0 +1,7 @@
+-r requirements.txt
+pyarrow==25.0.1
+httpx==0.28.1
+datasets==5.0.1
+matplotlib==3.11.2
+accelerate==1.15.0
+python-dotenv==1.2.3

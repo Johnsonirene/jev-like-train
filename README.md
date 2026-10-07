@@ -1,6 +1,6 @@
-# JEV 类决策模型：两套本地 API 部署代码
+# JEV 类决策模型：训练与 API 部署
 
-这里保留已训练模型所需的推理代码、HTTP 服务、依赖及部署清单。模型权重需要单独传到服务器，GitHub 仓库本身不能代替模型文件。
+这里包含两套模型的数据准备、训练、选优、温度校准、评测、推理代码、HTTP 服务及部署清单。模型权重需要单独传到服务器，GitHub 仓库本身不能代替模型文件。
 
 | 服务 | 骨干 | 决策接口 | 题型 |
 |---|---|---|---|
@@ -17,10 +17,13 @@
 ## 仓库内容
 
 ```text
-src/autojev/                 # autojev 推理、协议和 FastAPI 服务（4 个 Python 文件）
+src/autojev/                 # autojev 完整源码：训练、数据、评测、推理、服务
 agentjev_api/agentjev/       # AgentJev 模型
 agentjev_api/jev_service/    # 输入协议、推理引擎、共享前缀编码和 HTTP 服务
-agentjev_api/scripts/serve.py
+agentjev_api/scripts/        # 下载、切分、训练、冒烟配置及服务入口
+training/autojev/            # 固定来源清单、数据缓存准备和资源监控脚本
+requirements-training.txt   # 训练额外依赖
+TRAINING.md                 # 两套训练流程与命令
 requirements.txt            # 两套服务共用的非 PyTorch 运行依赖
 requirements-torch-cu130.txt # 本机验证使用的 CUDA 13.0 PyTorch / torchvision
 DEPLOYMENT.md               # 文件清单、模型传输和启动命令
@@ -30,7 +33,7 @@ validation-*.json            # 本次实际 HTTP 验证结果
 LICENSE / NOTICE            # 上游来源、许可和导出副本改动说明
 ```
 
-部署步骤见 [DEPLOYMENT.md](DEPLOYMENT.md)。训练数据、虚拟环境、缓存、优化器状态、中间 checkpoint 和权重均不上传普通 Git。此仓库只提供部署代码，不包含重新训练的完整流水线。
+训练步骤见 [TRAINING.md](TRAINING.md)，部署步骤见 [DEPLOYMENT.md](DEPLOYMENT.md)。训练数据、虚拟环境、缓存、优化器状态、中间 checkpoint 和权重均不上传普通 Git。训练和部署共用模型实现；默认训练流程使用公开数据和本地零样本底座参照。
 
 ## 来源及改动
 

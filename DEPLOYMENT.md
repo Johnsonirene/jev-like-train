@@ -1,12 +1,12 @@
 # 部署训练完成的模型
 
-代码仓库和模型产物要分别准备。以下路径中的 `/home/longcat/...` 和 `/mnt/d/...` 是训练机器上的来源；服务器上可以放在自己的路径，只需启动时指向正确目录。
+代码仓库和模型产物要分别准备。所有文件路径均相对于代码仓库根目录。原训练工程来源目录单独注明为相对于原工程根目录；服务器可按启动命令放置文件。
 
 ## 1. 环境与公共代码
 
 已验证环境：Linux / WSL2、Python 3.12.3、RTX 5070 Ti 16GB、torch 2.14.1+cu130、torchvision 0.29.1+cu130、transformers 5.17.0。autojev 使用 Python 3.12 的类型语法，不能用 Python 3.10/3.11。CUDA 驱动必须支持安装的 PyTorch wheel。
 
-autojev 的首次 CUDA 推理会触发 Triton 编译，需要 C 编译器、链接器及 Python 开发头文件。本机没有系统 gcc，因此本次验证设置了 `CC` 为训练任务自带 gcc-13；通用 Ubuntu 服务器可安装 `build-essential` 和与 Python 版本匹配的 `python3.12-dev`。如果 compiler 不在 PATH，显式设置 `CC=/path/to/gcc`。本机 flash-linear-attention / fla-core 已卸载，沿用 transformers 的回退路径，部署不要求安装它们。
+autojev 的首次 CUDA 推理会触发 Triton 编译，需要 C 编译器、链接器及 Python 开发头文件。本机没有系统 gcc，因此本次验证设置了 `CC` 为训练任务自带 gcc-13；通用 Ubuntu 服务器可安装 `build-essential` 和与 Python 版本匹配的 `python3.12-dev`。如果 compiler 不在 PATH，显式设置 `CC=gcc`（确保 gcc 在 PATH 中）。本机 flash-linear-attention / fla-core 已卸载，沿用 transformers 的回退路径，部署不要求安装它们。
 
 在仓库根目录执行：
 
@@ -27,10 +27,12 @@ pip install -r requirements.txt
 主组来源：
 
 ```text
-/home/longcat/projects/jev-train/pplx_small/runs/full-noncausal/checkpoints/selected/
+training/autojev/runs/full-noncausal/checkpoints/selected/
 ```
 
-`selected` 是指向 `step-01050` 的软链接。应复制实际内容，不能只传软链接。
+本仓库重新训练会生成上述目录；已有训练产物在原工程的 `pplx_small/runs/full-noncausal/checkpoints/selected/`。
+
+现有训练产物的 `selected` 是指向 `step-01050` 的软链接。应复制实际内容，不能只传软链接。
 
 | 必需文件 | 用途 |
 |---|---|
@@ -50,18 +52,19 @@ pip install -r requirements.txt
 在训练机打包：
 
 ```bash
-tar -C /home/longcat/projects/jev-train/pplx_small/runs/full-noncausal/checkpoints/selected \
-  -czf /tmp/autojev-selected.tar.gz .
+mkdir -p artifacts
+tar -C training/autojev/runs/full-noncausal/checkpoints/selected \
+  -czf artifacts/autojev-selected.tar.gz .
 ```
 
 将压缩包传到服务器后，在克隆的代码仓库根目录解压并启动：
 
 ```bash
 mkdir -p checkpoints/autojev
-tar -xzf /path/to/autojev-selected.tar.gz -C checkpoints/autojev
+tar -xzf artifacts/autojev-selected.tar.gz -C checkpoints/autojev
 source .venv/bin/activate
-export PYTHONPATH="$PWD/src"
-export AUTOJEV_CHECKPOINT="$PWD/checkpoints/autojev"
+export PYTHONPATH=src
+export AUTOJEV_CHECKPOINT=checkpoints/autojev
 export AUTOJEV_API_KEY='replace-with-your-own-key'
 export AUTOJEV_HOST=127.0.0.1
 export PORT=8000
@@ -84,17 +87,19 @@ curl --noproxy '*' http://127.0.0.1:8000/v1/systemone \
 
 Choice 返回 `choice/probabilities/confidence`，Noul 返回 `noul=P(true)`，Score 返回期望评分、概率和图例。`usage.output_tokens=0`。请求支持 base64 PNG/JPEG/WebP 图片。服务遇到并发忙返回 529，可按 Retry-After 重试；实际长请求显存需求随长度和题数上升，短样例验证不能证明最大负载容量。
 
-causal 对照也可以部署：改为复制 `pplx_small/runs/full-causal/checkpoints/selected/` 的实际内容。不要混合两个 checkpoint 的文件，attention_mode/temperature 由各自配置决定。本次新增 HTTP 验证使用主组；causal 的加载已在训练最终验收中通过。
+causal 对照也可以部署：改为复制 `training/autojev/runs/full-causal/checkpoints/selected/` 的实际内容。不要混合两个 checkpoint 的文件，attention_mode/temperature 由各自配置决定。本次新增 HTTP 验证使用主组；causal 的加载已在训练最终验收中通过。
 
 ## 3. AgentJev：best.pt + 校准文件 + 对应底座
 
-默认部署现有 `full_qwen3_0.6b`：
+默认部署 `full_qwen3_0.6b`；本仓库训练后的文件路径为：
 
 ```text
-/home/longcat/projects/jev-train/text_jev_train/runs/full_qwen3_0.6b/best.pt
-/home/longcat/projects/jev-train/text_jev_train/runs/full_qwen3_0.6b/temperatures.json
-/mnt/d/LLm/Base-models/Qwen3-0.6B/
+agentjev_api/runs/full_qwen3_0.6b/best.pt
+agentjev_api/runs/full_qwen3_0.6b/temperatures.json
+models/Qwen3-0.6B/
 ```
+
+已有 checkpoint 在原工程的 `text_jev_train/runs/full_qwen3_0.6b/`，对应底座名为 `Qwen3-0.6B`。将该底座整体复制到仓库的 `models/Qwen3-0.6B/`。
 
 | 文件 / 目录 | 用途 |
 |---|---|
@@ -138,17 +143,18 @@ curl --noproxy '*' http://127.0.0.1:8149/api/evaluate \
 
 返回 `results[].answers[]`，含 `distribution`，并按题型返回答案。`usage.generated_tokens=0`。AgentJev 和 autojev 的 JSON 结构及真假类型名称不同，调用方需使用对应协议。
 
-若要部署 `full_qwen3_0.6b_base`，则改用这个 run 的 `best.pt/temperatures.json`，并配 `/mnt/d/LLm/Base-models/Qwen3-0.6B-Base/`。不要混用两组分词器和校准文件。本次新增 HTTP 验证使用 `full_qwen3_0.6b`。
+若要部署 `full_qwen3_0.6b_base`，则改用这个 run 的 `best.pt/temperatures.json`，并配 `models/Qwen3-0.6B-Base/`。不要混用两组分词器和校准文件。本次新增 HTTP 验证使用 `full_qwen3_0.6b`。
 
 ## 4. 检查部署
 
 ```bash
 # 在有编译器的环境中运行；脚本会启动并关闭自己的本机测试服务。
+mkdir -p artifacts
 python scripts/smoke_api.py autojev \
-  --checkpoint checkpoints/autojev --output /tmp/validation-autojev.json
+  --checkpoint checkpoints/autojev --output artifacts/validation-autojev.json
 python scripts/smoke_api.py agentjev \
   --checkpoint checkpoints/agentjev --backbone models/Qwen3-0.6B \
-  --output /tmp/validation-agentjev.json
+  --output artifacts/validation-agentjev.json
 ```
 
 验证覆盖真实 checkpoint 的离线启动、health、首页、三个决策题型、有限概率及归一化、无生成 token、非法请求；autojev 还覆盖 API key 和图片推理。使用新构造的样例，不重复运行训练的 test 集，也不据此评价业务准确率。本次实际运行结果见 `validation-autojev.json` 和 `validation-agentjev.json`。这次验证复用了训练环境，没有在全新服务器重新安装依赖；编译器和 CUDA 驱动由部署环境提供。

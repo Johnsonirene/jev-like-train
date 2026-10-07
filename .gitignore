@@ -13,3 +13,9 @@ cache/
 *.safetensors
 *.bin
 *.log
+prepared/
+prepared_smoke/
+progress/
+logs/
+artifacts/
+split_manifest.json

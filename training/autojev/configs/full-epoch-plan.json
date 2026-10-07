@@ -1,0 +1,29 @@
+{
+  "train_rows": 95999,
+  "epochs": 1,
+  "planned_steps_each": 1500,
+  "effective_batch_size": 64,
+  "batch_size": 4,
+  "token_budget": 4096,
+  "max_length": 4096,
+  "lr": 1e-05,
+  "warmup_ratio": 0.05,
+  "weight_decay": 0.01,
+  "brier_weight": 0,
+  "seed": 20260920,
+  "pooling": "last",
+  "cpu_threads": 8,
+  "eval_every": 150,
+  "resume_every": 150,
+  "source_manifest_sha256": "76c2758626abf00c7de248cdeaea815f4afced658a9196ba05804c746720319c",
+  "runs": {
+    "full-noncausal": {
+      "attention_mode": "noncausal_full_attention"
+    },
+    "full-causal": {
+      "attention_mode": "causal"
+    }
+  },
+  "initialization": "fixed base model, fresh optimizer; preserve pilot artifacts",
+  "test_usage": "no test fitting, no checkpoint selection from test; previously inspected typed test is not untouched"
+}
