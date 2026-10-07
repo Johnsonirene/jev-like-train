@@ -1,0 +1,95 @@
+{
+  "service": "agentjev",
+  "checkpoint": "/home/longcat/projects/jev-train/text_jev_train/runs/full_qwen3_0.6b",
+  "offline": true,
+  "checks": {
+    "health": true,
+    "root": true,
+    "three_primitives_and_probabilities": true,
+    "invalid_request": true
+  },
+  "health": {
+    "status": "ready",
+    "api_version": "agentjev.decision.v1",
+    "model": "AgentJev-0.6B",
+    "checkpoint": "full_qwen3_0.6b",
+    "checkpoint_sha256": "b4aea4762c389172ae902120f0f3336696e3a1f27844dbf3b1e99e89626f545b",
+    "types": [
+      "boolean",
+      "choice",
+      "score"
+    ],
+    "max_path_tokens": 2048,
+    "max_choice_candidates": 255,
+    "output_token_decoding": false,
+    "shared_prefix_compute": true,
+    "encoder": "auto",
+    "temperatures": {
+      "boolean": 1.0352649238413776,
+      "choice": 1.0352649238413776,
+      "score": 1.0352649238413776
+    },
+    "probability_semantics": "model distribution; domain calibration is not guaranteed"
+  },
+  "response": {
+    "api_version": "agentjev.decision.v1",
+    "model": "full_qwen3_0.6b",
+    "results": [
+      {
+        "id": "synthetic-smoke",
+        "answers": [
+          {
+            "id": "route",
+            "type": "choice",
+            "distribution": {
+              "billing": 0.7314086556434631,
+              "tech": 0.2685912847518921
+            },
+            "value": "billing",
+            "description": "Duplicate charge or refund",
+            "top_probability": 0.7314086556434631,
+            "margin": 0.46281737089157104
+          },
+          {
+            "id": "refund",
+            "type": "boolean",
+            "distribution": {
+              "true": 0.3255842924118042,
+              "false": 0.6744157075881958
+            },
+            "probability": 0.3255842924118042,
+            "value": false
+          },
+          {
+            "id": "urgency",
+            "type": "score",
+            "distribution": {
+              "0": 0.32511839270591736,
+              "1": 0.3867413103580475,
+              "2": 0.2881402373313904
+            },
+            "score": 0.9630217850208282,
+            "level": 1,
+            "legend": [
+              "Low",
+              "Medium",
+              "High"
+            ]
+          }
+        ]
+      }
+    ],
+    "usage": {
+      "questions": 3,
+      "candidate_paths": 7,
+      "input_path_tokens": 237,
+      "generated_tokens": 0,
+      "truncated_inputs": 0,
+      "backbone_input_tokens": 237,
+      "shared_prefix_questions": 0,
+      "wall_ms": 1008.27
+    }
+  },
+  "passed": true,
+  "elapsed_seconds": 14.155
+}

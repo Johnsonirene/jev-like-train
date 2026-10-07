@@ -1,0 +1,138 @@
+{
+  "autojev": {
+    "full-noncausal": {
+      "source_directory": "/home/longcat/projects/jev-train/pplx_small/runs/full-noncausal/checkpoints/step-01050",
+      "base_model": "Qwen/Qwen3.5-0.8B-Base",
+      "revision": "dc7cdfe2ee4154fa7e30f5b51ca41bfa40174e68",
+      "attention_mode": "noncausal_full_attention",
+      "temperature": 1.0499191408242807,
+      "total_bytes": 1726558973,
+      "files": [
+        {
+          "file": "chat_template.jinja",
+          "bytes": 7755,
+          "sha256": "273d8e0e683b885071fb17e08d71e5f2a5ddfb5309756181681de4f5a1822d80"
+        },
+        {
+          "file": "config.json",
+          "bytes": 2692,
+          "sha256": "e430598ca8aa6228b9856573dcc0425d0710acad4a19a937da52cde724b34f25"
+        },
+        {
+          "file": "decision_config.json",
+          "bytes": 6639,
+          "sha256": "659b6bfa5125fc5b11220727e6db9473edf0f4031889edfcb6c548b0ebe4a953"
+        },
+        {
+          "file": "model.safetensors",
+          "bytes": 1706027688,
+          "sha256": "fb5128490e3694e336080ef1321b64b4116ea3349998e08b9610c4fa6f6713ac"
+        },
+        {
+          "file": "processor_config.json",
+          "bytes": 1219,
+          "sha256": "c10222297bdb55996279fcf25352a0769e7fd2208d114ebeb137b6e141fb3b78"
+        },
+        {
+          "file": "readout.safetensors",
+          "bytes": 522320,
+          "sha256": "b22302ef41700c6ffe36b80895a3224b63333f6d552ddefe0b02fdd742b46de7"
+        },
+        {
+          "file": "tokenizer.json",
+          "bytes": 19989492,
+          "sha256": "6f32ce20dc35f57a7f9ad1eac03525bd7d30f9df8cea6507e958279cc3657706"
+        },
+        {
+          "file": "tokenizer_config.json",
+          "bytes": 1168,
+          "sha256": "13d14968d9cf84d1a60fcb120bbaa98eb4c8b76e6a929c47cc87de695873e3d7"
+        }
+      ]
+    },
+    "full-causal": {
+      "source_directory": "/home/longcat/projects/jev-train/pplx_small/runs/full-causal/checkpoints/step-01050",
+      "base_model": "Qwen/Qwen3.5-0.8B-Base",
+      "revision": "dc7cdfe2ee4154fa7e30f5b51ca41bfa40174e68",
+      "attention_mode": "causal",
+      "temperature": 1.052955333131324,
+      "total_bytes": 1726558954,
+      "files": [
+        {
+          "file": "chat_template.jinja",
+          "bytes": 7755,
+          "sha256": "273d8e0e683b885071fb17e08d71e5f2a5ddfb5309756181681de4f5a1822d80"
+        },
+        {
+          "file": "config.json",
+          "bytes": 2692,
+          "sha256": "e430598ca8aa6228b9856573dcc0425d0710acad4a19a937da52cde724b34f25"
+        },
+        {
+          "file": "decision_config.json",
+          "bytes": 6620,
+          "sha256": "98a463644d7e9b63e418cd68f542831062e0cf5fb5f1c28e0c064e2d9b7f6a21"
+        },
+        {
+          "file": "model.safetensors",
+          "bytes": 1706027688,
+          "sha256": "4e54661ae143af9e0fd4d6819538011d3b10896a0a7d96993036f2cbbca73b0d"
+        },
+        {
+          "file": "processor_config.json",
+          "bytes": 1219,
+          "sha256": "c10222297bdb55996279fcf25352a0769e7fd2208d114ebeb137b6e141fb3b78"
+        },
+        {
+          "file": "readout.safetensors",
+          "bytes": 522320,
+          "sha256": "17aead4c687f4f48d414c64c48e65d2067b53c915dda182721909bc0c8a655da"
+        },
+        {
+          "file": "tokenizer.json",
+          "bytes": 19989492,
+          "sha256": "6f32ce20dc35f57a7f9ad1eac03525bd7d30f9df8cea6507e958279cc3657706"
+        },
+        {
+          "file": "tokenizer_config.json",
+          "bytes": 1168,
+          "sha256": "13d14968d9cf84d1a60fcb120bbaa98eb4c8b76e6a929c47cc87de695873e3d7"
+        }
+      ]
+    }
+  },
+  "agentjev": {
+    "full_qwen3_0.6b": {
+      "source_directory": "/home/longcat/projects/jev-train/text_jev_train/runs/full_qwen3_0.6b",
+      "backbone_directory": "/mnt/d/LLm/Base-models/Qwen3-0.6B",
+      "files": [
+        {
+          "file": "best.pt",
+          "bytes": 2393802682,
+          "sha256": "b4aea4762c389172ae902120f0f3336696e3a1f27844dbf3b1e99e89626f545b"
+        },
+        {
+          "file": "temperatures.json",
+          "bytes": 388,
+          "sha256": "15bf872d8c3e9ee401d357d2240e19daeb60ba64514f9af280424bc115bff16e"
+        }
+      ]
+    },
+    "full_qwen3_0.6b_base": {
+      "source_directory": "/home/longcat/projects/jev-train/text_jev_train/runs/full_qwen3_0.6b_base",
+      "backbone_directory": "/mnt/d/LLm/Base-models/Qwen3-0.6B-Base",
+      "files": [
+        {
+          "file": "best.pt",
+          "bytes": 2393802682,
+          "sha256": "6d1ba9bb27f174f0ca6404812cb60fd12cfc4ae60fb327353cfaad03eef625d4"
+        },
+        {
+          "file": "temperatures.json",
+          "bytes": 359,
+          "sha256": "07592b1db3eba0a962a5389bb3eff0963fd31f88d62f66324dae35e83cb6e380"
+        }
+      ]
+    }
+  }
+}

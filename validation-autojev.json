@@ -1,0 +1,80 @@
+{
+  "service": "autojev",
+  "checkpoint": "/home/longcat/projects/jev-train/pplx_small/runs/full-noncausal/checkpoints/step-01050",
+  "offline": true,
+  "checks": {
+    "health": true,
+    "root": true,
+    "authentication_and_docs": true,
+    "three_primitives_and_probabilities": true,
+    "invalid_request": true,
+    "image_inference": true
+  },
+  "health": {
+    "status": "ready",
+    "model": "autojev-qwen3.5-0.8b-base",
+    "checkpoint": "/home/longcat/projects/jev-train/pplx_small/runs/full-noncausal/checkpoints/step-01050",
+    "authentication": true,
+    "modalities": [
+      "text",
+      "image"
+    ]
+  },
+  "response": {
+    "model": "autojev-qwen3.5-0.8b-base",
+    "answers": {
+      "route": {
+        "type": "choice",
+        "probabilities": {
+          "billing": 0.995579552783197,
+          "tech": 0.004420447216803035
+        },
+        "choice": "billing",
+        "confidence": 0.991159105566394
+      },
+      "refund": {
+        "type": "noul",
+        "noul": 0.9425586883377443
+      },
+      "urgency": {
+        "type": "score",
+        "probabilities": {
+          "0": 0.4859004544332556,
+          "1": 0.3829446377911473,
+          "2": 0.13115490777559716
+        },
+        "legend": {
+          "0": "Low",
+          "1": "Medium",
+          "2": "High"
+        },
+        "score": 0.6452544533423417,
+        "confidence": 0.03211831998648751
+      }
+    },
+    "usage": {
+      "input_tokens": 300,
+      "output_tokens": 0
+    }
+  },
+  "image_response": {
+    "model": "autojev-qwen3.5-0.8b-base",
+    "answers": {
+      "color": {
+        "type": "choice",
+        "probabilities": {
+          "red": 0.6445764899253845,
+          "blue": 0.3554235100746155
+        },
+        "choice": "red",
+        "confidence": 0.28915297985076904
+      }
+    },
+    "usage": {
+      "input_tokens": 156,
+      "output_tokens": 0
+    }
+  },
+  "passed": true,
+  "elapsed_seconds": 9.618
+}
