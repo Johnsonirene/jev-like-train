@@ -24,6 +24,8 @@ agentjev_api/scripts/        # 下载、切分、训练、冒烟配置及服务�
 training/autojev/            # 固定来源清单、数据缓存准备和资源监控脚本
 requirements-training.txt   # 训练额外依赖
 TRAINING.md                 # 两套训练流程与命令
+PLOTTING.md                 # 绘图命令、日志要求和已生成曲线
+docs/plots/                 # 实际训练日志生成的 PNG / SVG
 requirements.txt            # 两套服务共用的非 PyTorch 运行依赖
 requirements-torch-cu130.txt # 本机验证使用的 CUDA 13.0 PyTorch / torchvision
 DEPLOYMENT.md               # 文件清单、模型传输和启动命令
@@ -49,3 +51,7 @@ LICENSE / NOTICE            # 上游来源、许可和导出副本改动说明
 - [AgentJev HTTP 验证](validation-agentjev.json)：离线加载、health、首页、三个题型、有限且归一化的概率和非法请求。
 
 首次验证发现本机缺少系统 C 编译器；设置训练时已有的 gcc-13 环境后 autojev 通过。部署所需系统依赖已写入说明。验证复用了训练环境，未在全新服务器安装依赖或部署公网服务。
+
+## 训练曲线
+
+[绘图说明与实际曲线](PLOTTING.md)包含 autojev 主组/causal 的 loss、dev accuracy、ECE、Brier、每步耗时、累计显存峰值和进程内存，以及 AgentJev 的 loss、dev accuracy、dev soft CE 和累计训练耗时。两套脚本读取训练日志，输出 PNG / SVG 和文件哈希清单。

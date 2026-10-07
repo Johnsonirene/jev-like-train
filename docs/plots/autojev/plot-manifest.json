@@ -1,0 +1,49 @@
+{
+  "passed": true,
+  "sources": {
+    "runs/full-noncausal/run/training.jsonl": "e80460dc61c2dac387753d436edd203abc2c2db6b04d7f2b70c21a0706fb634d",
+    "runs/full-noncausal/run/evaluations.jsonl": "83c391ff2b214238ab6850315877f094e760ed50f5cfe6e69e27f5297e994644",
+    "runs/full-causal/run/training.jsonl": "b32d6008a9915c406626d37ed95bf0ab271690b26b00110faf46afee2ae6598a",
+    "runs/full-causal/run/evaluations.jsonl": "34ba63318d943bb0e00ef6ffc6943d529a532ac9b2ea6065b244209b09c43067",
+    "baselines/full-public/base-development.json": "1c81d70e25217f9173cb326a272a19804e0c00e8048be8adf11ce32a87cfb678",
+    "runs/full-noncausal/run/summary.json": "740ceda932676baf391dc33057baf09113931b2c941f893e4a5edabf380dd2e6",
+    "runs/full-causal/run/summary.json": "57c48153e007cda348b8f1e78177bc016fb3e692d8d7ae9e4bfe4310c952d88f",
+    "logs/full-noncausal-resources.json": "1df14cfab0acdbd0623b739f3bd4b8b638a742fd4c4676a0fd5c12c0f9a807a3",
+    "logs/full-causal-resources.json": "05d8546ac5254f9f1c3b2da8c15924e3e9ce3972e1f1c71eb4c9331be4b247c4"
+  },
+  "artifacts": [
+    {
+      "path": "learning_and_calibration.png",
+      "bytes": 418060,
+      "sha256": "a616f3cabe5c88fe84410f33945d1dedbef0005d17857c251cf7c5559258f351",
+      "pixels": [
+        2550,
+        1550
+      ]
+    },
+    {
+      "path": "learning_and_calibration.svg",
+      "bytes": 242123,
+      "sha256": "bd7915c28cd20a330e68bcf770544fb2232f5dacfc97fd101fa9cbbeb05bfd94"
+    },
+    {
+      "path": "time_and_resources.png",
+      "bytes": 199122,
+      "sha256": "94892c2496808b7f92f3fa51f16e52b80438292a7a96b19fd6ca4a9acc2e8aca",
+      "pixels": [
+        3149,
+        873
+      ]
+    },
+    {
+      "path": "time_and_resources.svg",
+      "bytes": 189678,
+      "sha256": "7f650f237e42db3446ef23fb1eeeb92599de0e5844c63cf4e22f945f41d10a0a"
+    }
+  ],
+  "notes": [
+    "Trailing means use available preceding steps, up to 50.",
+    "GPU curves are cumulative torch.cuda.max_memory_allocated at each training step, not instantaneous or whole-card use.",
+    "Dev is used for checkpoint selection; no test inference was performed."
+  ]
+}

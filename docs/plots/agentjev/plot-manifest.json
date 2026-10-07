@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "training_steps": 600,
+  "dev_observations": 6,
+  "source_file": "events.jsonl",
+  "source_sha256": "a6c011bef87f455866af35e5541818423c2c9b89eb7a66715c05b698da96e0f6",
+  "artifacts": [
+    {
+      "file": "training_curves.png",
+      "sha256": "070343cf2e86df2941fca369cf98be322142838f8ba23c140e5cc548967279aa"
+    },
+    {
+      "file": "training_curves.svg",
+      "sha256": "b4ca6b29d416ca5e582b52de052b9960b3ecce3cd2d1fb4c5048eba748b25a78"
+    }
+  ],
+  "notes": [
+    "Only saved training and development observations are plotted; no test inference is run.",
+    "Development observations exclude the separate initialization report."
+  ]
+}

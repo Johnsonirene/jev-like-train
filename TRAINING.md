@@ -82,6 +82,7 @@ python scripts/run_module.py autojev.evaluate logs/baseline-resources.json \
 ### 4. 主组完整 1 epoch
 
 ```bash
+export AUTOJEV_EVENTS=runs/full-noncausal/run/events.jsonl
 python scripts/run_module.py autojev.train logs/full-noncausal-resources.json \
   --train data/full-public/train.jsonl \
   --development data/full-public/dev.jsonl \
@@ -101,7 +102,7 @@ python scripts/run_module.py autojev.train logs/full-noncausal-resources.json \
 
 温度在独立 temperature 分区拟合。选优门槛保留：calibrated ECE/Brier 各不超过固定参照 + 0.01，eligible 中按准确率、Brier 等原规则选择。不要为了得到 selected 而放宽门槛。
 
-需要 causal 对照时，复用同一冻结数据与 reference，将 attention-mode 改为 `causal`，同时改用 `runs/full-causal/run`、`runs/full-causal/checkpoints` 和新的资源日志文件。两组顺序运行。
+需要 causal 对照时，复用同一冻结数据与 reference，将 attention-mode 改为 `causal`，同时改用 `runs/full-causal/run`、`runs/full-causal/checkpoints` 和 `logs/full-causal-resources.json`，同时将 `AUTOJEV_EVENTS` 改为 `runs/full-causal/run/events.jsonl`。两组顺序运行。
 
 首次检查训练流程时，可在主组命令上改用新的 smoke run/output，附加 `--stop-after 20 --eval-every 10 --resume-every 10`；该命令仍会运行 dev/temperature，实际耗时取决于数据规模。不要覆盖已有 run。
 
@@ -173,3 +174,7 @@ python agentjev_api/scripts/train.py \
 ## 本次补充代码的验证范围
 
 核心训练、选优、校准和模型文件直接复用已有训练通过的源码；这次补充不重新执行两套完整训练。新增检查包含训练/数据/评测入口加载、CLI 参数、AgentJev 数据切分复现和来源转换检查；具体通过项记录在 `validation-training.json`。文件路径使用仓库相对路径，运行时输出的验证记录可以记录实际所在位置。
+
+## 绘图
+
+两套曲线脚本和生成命令见 [PLOTTING.md](PLOTTING.md)。图由已有训练日志生成，不会重新训练或运行 test 推理。

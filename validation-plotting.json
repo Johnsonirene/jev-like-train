@@ -1,0 +1,40 @@
+{
+  "passed": true,
+  "real_training_logs_used": true,
+  "autojev_steps_each": 1500,
+  "agentjev_steps": 600,
+  "images_visually_inspected": true,
+  "markdown_paths_relative": true,
+  "artifacts": [
+    {
+      "file": "docs/plots/autojev/learning_and_calibration.svg",
+      "bytes": 242123,
+      "sha256": "bd7915c28cd20a330e68bcf770544fb2232f5dacfc97fd101fa9cbbeb05bfd94"
+    },
+    {
+      "file": "docs/plots/autojev/time_and_resources.png",
+      "bytes": 199122,
+      "sha256": "94892c2496808b7f92f3fa51f16e52b80438292a7a96b19fd6ca4a9acc2e8aca"
+    },
+    {
+      "file": "docs/plots/autojev/time_and_resources.svg",
+      "bytes": 189678,
+      "sha256": "7f650f237e42db3446ef23fb1eeeb92599de0e5844c63cf4e22f945f41d10a0a"
+    },
+    {
+      "file": "docs/plots/autojev/learning_and_calibration.png",
+      "bytes": 418060,
+      "sha256": "a616f3cabe5c88fe84410f33945d1dedbef0005d17857c251cf7c5559258f351"
+    },
+    {
+      "file": "docs/plots/agentjev/training_curves.png",
+      "bytes": 256733,
+      "sha256": "070343cf2e86df2941fca369cf98be322142838f8ba23c140e5cc548967279aa"
+    },
+    {
+      "file": "docs/plots/agentjev/training_curves.svg",
+      "bytes": 113925,
+      "sha256": "b4ca6b29d416ca5e582b52de052b9960b3ecce3cd2d1fb4c5048eba748b25a78"
+    }
+  ]
+}
